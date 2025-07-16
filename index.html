@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hanuman Art Gallery - Jai Bajrang Bali</title>
+    <meta name="description" content="Explore a divine collection of Hanuman ji's wallpapers, digital art, and sketches. Download high-quality spiritual art for your devices.">
+    <meta name="keywords" content="Hanuman, Bajrang Bali, Hindu God, spiritual art, wallpaper, digital art, sketches, devotional images">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide-icons@latest/dist/lucide.min.js"></script>
+
+    <!-- Custom Configuration for Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        saffron: '#FF6F00',
+                        'deep-maroon': '#800000',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        devanagari: ['Noto Sans Devanagari', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Note: Using only Tailwind CSS as requested. Bootstrap is not included to prevent CSS class conflicts. */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-group:hover .card-overlay {
+            opacity: 1;
+        }
+        .modal {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md fixed top-0 left-0 right-0 z-50 shadow-md">
+        <nav class="container mx-auto px-4 md:px-12 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-saffron font-devanagari">जय हनुमान</a>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#gallery" class="hover:text-saffron transition-colors">Gallery</a>
+                <a href="#about" class="hover:text-saffron transition-colors">About</a>
+                <a href="mailto:contact@example.com" class="hover:text-saffron transition-colors">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-200">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#gallery" class="block py-2 px-4 text-sm hover:bg-gray-100">Gallery</a>
+            <a href="#about" class="block py-2 px-4 text-sm hover:bg-gray-100">About</a>
+            <a href="mailto:contact@example.com" class="block py-2 px-4 text-sm hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg h-screen flex items-center justify-center text-white">
+            <div class="text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-bold font-devanagari mb-4">जय बजरंग बली</h1>
+                <p class="text-lg md:text-xl mb-8">Explore Divine Hanuman Art</p>
+                <a href="#gallery" class="bg-saffron text-white rounded-lg px-8 py-3 font-semibold hover:bg-orange-700 transition-colors text-lg">
+                    View Gallery
+                </a>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 md:py-24">
+            <div class="container mx-auto px-4 md:px-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Art Gallery</h2>
+                
+                <!-- Filters -->
+                <div class="flex flex-col md:flex-row gap-4 mb-8 justify-center">
+                    <input type="text" id="search-bar" placeholder="Search by tag or artist..." class="w-full md:w-1/3 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-saffron">
+                    <select id="category-filter" class="w-full md:w-1/4 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-saffron">
+                        <option value="all">All Categories</option>
+                        <option value="digital">Digital</option>
+                        <option value="sketch">Sketch</option>
+                        <option value="devotional">Devotional</option>
+                        <option value="wallpaper">Wallpapers</option>
+                    </select>
+                </div>
+
+                <!-- Image Grid -->
+                <div id="image-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Art cards will be injected here by JS -->
+                </div>
+                 <p id="no-results" class="text-center text-gray-500 hidden mt-8">No artwork found matching your criteria.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="about" class="bg-deep-maroon text-gray-200 py-12">
+        <div class="container mx-auto px-4 md:px-12 text-center">
+            <h3 class="text-2xl font-bold mb-4">About This Project</h3>
+            <p class="max-w-3xl mx-auto mb-6">This gallery is a humble offering to Lord Hanuman, celebrating his strength, devotion, and divine presence through art. All artworks are contributed by devotees and artists from around the world.</p>
+            <div class="flex justify-center items-center space-x-6 mb-8">
+                <a href="#" class="hover:text-saffron"><i data-lucide="instagram" class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-saffron"><i data-lucide="youtube" class="w-6 h-6"></i></a>
+                <a href="#" class="hover:text-saffron"><i data-lucide="twitter" class="w-6 h-6"></i></a>
+            </div>
+            <div class="mb-8">
+                <button id="play-chalisa-btn" class="bg-saffron text-white rounded-lg px-6 py-2 font-semibold hover:bg-orange-700 transition-colors flex items-center mx-auto">
+                    <i id="play-icon" data-lucide="play" class="w-5 h-5 mr-2"></i>
+                    <i id="pause-icon" data-lucide="pause" class="w-5 h-5 mr-2 hidden"></i>
+                    <span id="play-text">Play Hanuman Chalisa</span>
+                </button>
+                <audio id="hanuman-chalisa-audio" src="https://archive.org/download/hanuman-chalisa-1-yt-1-s/Hanuman%20Chalisa%201%20yt1s.com.mp3" loop></audio>
+            </div>
+            <div class="border-t border-gray-600 pt-6 text-sm">
+                <p>&copy; 2024 Hanuman Art Gallery. All Rights Reserved.</p>
+                <a href="#" class="hover:text-saffron">Privacy Policy</a> | <a href="#" class="hover:text-saffron">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Full-Screen Preview Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4 hidden opacity-0 visibility-hidden">
+        <div id="modal-content" class="bg-white rounded-2xl shadow-lg w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row transform scale-95">
+            <div class="md:w-2/3 bg-gray-200 flex items-center justify-center rounded-l-2xl">
+                <img id="modal-img" src="" alt="Full-screen artwork" class="max-w-full max-h-[50vh] md:max-h-[90vh] object-contain">
+            </div>
+            <div class="md:w-1/3 p-6 flex flex-col justify-center">
+                <h3 id="modal-title" class="text-2xl font-bold mb-2">Artwork Title</h3>
+                <p class="text-gray-600 mb-4">by <span id="modal-artist" class="font-semibold">Artist</span></p>
+                <div class="space-y-3 mb-4">
+                    <a id="download-hd" href="#" download class="block w-full text-center bg-saffron text-white rounded-lg px-4 py-2 hover:bg-orange-700 transition-colors">Download 1080p</a>
+                    <a id="download-4k" href="#" download class="block w-full text-center bg-deep-maroon text-white rounded-lg px-4 py-2 hover:bg-red-900 transition-colors">Download 4K</a>
+                </div>
+                <button id="modal-close-btn" class="mt-auto w-full text-center bg-gray-200 text-gray-800 rounded-lg px-4 py-2 hover:bg-gray-300 transition-colors">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- DATA ---
+        const artData = [
+            { id: 1, title: 'Meditating Hanuman', artist: 'Ravi Varma', category: 'digital', tags: ['meditation', 'peace', 'divine'], img: 'https://plus.unsplash.com/premium_photo-1674898511299-bb6d9f586b8b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGFudW1hbnxlbnwwfHwwfHx8MA%3D%3D', full: { hd: 'https://plus.unsplash.com/premium_photo-1674898511299-bb6d9f586b8b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aGFudW1hbnxlbnwwfHwwfHx8MA%3D%3D', '4k': 'https://images.unsplash.com/photo-1629631699525-5d7d6f581f6d?w=3840' } },
+            { id: 2, title: 'Pencil Sketch', artist: 'Priya Singh', category: 'sketch', tags: ['monochrome', 'powerful', 'drawing'], img: 'https://images.unsplash.com/photo-1583089892943-e02e5b017b6a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aGFudW1hbnxlbnwwfHwwfHx8MA%3D%3D', full: { hd: 'https://images.unsplash.com/photo-1606600230948-f6529103a45c?w=1920', '4k': 'https://images.unsplash.com/photo-1606600230948-f6529103a45c?w=3840' } },
+            { id: 3, title: 'Devotional Gaze', artist: 'Artisan Dev', category: 'devotional', tags: ['bhakti', 'eyes', 'spiritual'], img: 'https://images.unsplash.com/photo-1564984069790-2d0767de5856?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8aGFudW1hbnxlbnwwfHwwfHx8MA%3D%3D', full: { hd: 'https://images.unsplash.com/photo-1598048895593-c96dc4a7c134?w=1920', '4k': 'https://images.unsplash.com/photo-1598048895593-c96dc4a7c134?w=3840' } },
+            { id: 4, title: 'Mountain Strength', artist: 'Himalayan Art', category: 'wallpaper', tags: ['glowing', 'mountain', 'power'], img: 'https://plus.unsplash.com/premium_photo-1676111258345-d37b0aa20c72?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aGFudW1hbnxlbnwwfHwwfHx8MA%3D%3D', full: { hd: 'https://images.unsplash.com/photo-1617578294902-73a7e3a3c2a5?w=1920', '4k': 'https://images.unsplash.com/photo-1617578294902-73a7e3a3c2a5?w=3840' } },
+            { id: 5, title: 'Cosmic Hanuman', artist: 'Stellar Arts', category: 'digital', tags: ['galaxy', 'stars', 'abstract'], img: 'https://images.unsplash.com/photo-1730191567375-e82ce67160df?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aGFudW1hbnxlbnwwfHwwfHx8MA%3D%3D', full: { hd: 'https://placehold.co/1920x1080/FF6F00/FFFFFF?text=Cosmic+Art+HD', '4k': 'https://placehold.co/3840x2160/FF6F00/FFFFFF?text=Cosmic+Art+4K' } },
+            { id: 6, title: 'Hanuman Chalisa Art', artist: 'Scripto', category: 'devotional', tags: ['calligraphy', 'sanskrit', 'prayer'], img: 'https://images.unsplash.com/photo-1707833684948-11bd776ffdef?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aGFudW1hbnxlbnwwfHwwfHx8MA%3D%3D', full: { hd: 'https://placehold.co/1920x1080/800000/FFFFFF?text=Calligraphy+HD', '4k': 'https://placehold.co/3840x2160/800000/FFFFFF?text=Calligraphy+4K' } },
+            { id: 7, title: 'Minimalist Power', artist: 'Simple Strokes', category: 'sketch', tags: ['minimal', 'line art', 'modern'], img: 'https://images.unsplash.com/photo-1678188619602-37a41f9e1c8a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGhhbnVtYW58ZW58MHx8MHx8fDA%3D', full: { hd: 'https://placehold.co/1920x1080/DDDDDD/000000?text=Line+Art+HD', '4k': 'https://placehold.co/3840x2160/DDDDDD/000000?text=Line+Art+4K' } },
+            { id: 8, title: 'Sunset Bhakti', artist: 'Golden Hour', category: 'wallpaper', tags: ['sunset', 'silhouette', 'serene'], img: 'https://images.unsplash.com/photo-1721208485074-4b27c893a551?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhhbnVtYW58ZW58MHx8MHx8fDA%3D', full: { hd: 'https://placehold.co/1920x1080/FFC107/FFFFFF?text=Sunset+Bhakti+HD', '4k': 'https://placehold.co/3840x2160/FFC107/FFFFFF?text=Sunset+Bhakti+4K' } },
+        ];
+
+        // --- DOM ELEMENTS ---
+        const grid = document.getElementById('image-grid');
+        const searchBar = document.getElementById('search-bar');
+        const categoryFilter = document.getElementById('category-filter');
+        const noResultsMsg = document.getElementById('no-results');
+        
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modal-content');
+        const modalImg = document.getElementById('modal-img');
+        const modalTitle = document.getElementById('modal-title');
+        const modalArtist = document.getElementById('modal-artist');
+        const downloadHD = document.getElementById('download-hd');
+        const download4K = document.getElementById('download-4k');
+        const modalCloseBtn = document.getElementById('modal-close-btn');
+
+        const playBtn = document.getElementById('play-chalisa-btn');
+        const audio = document.getElementById('hanuman-chalisa-audio');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const playText = document.getElementById('play-text');
+        
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // --- FUNCTIONS ---
+        
+        // Render Gallery
+        function renderGallery(items) {
+            grid.innerHTML = '';
+            if (items.length === 0) {
+                noResultsMsg.classList.remove('hidden');
+            } else {
+                noResultsMsg.classList.add('hidden');
+            }
+            items.forEach(art => {
+                const card = document.createElement('div');
+                card.className = 'card-group bg-white rounded-2xl shadow-lg overflow-hidden relative cursor-pointer transform hover:-translate-y-2 transition-transform duration-300';
+                card.innerHTML = `
+                    <img src="${art.img}" alt="${art.title}" class="w-full h-96 object-cover" loading="lazy">
+                    <div class="card-overlay absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center opacity-0 transition-opacity duration-300">
+                        <div class="text-center text-white p-4">
+                            <h3 class="font-bold text-xl">${art.title}</h3>
+                            <p class="text-sm">by ${art.artist}</p>
+                            <button class="preview-btn mt-4 bg-saffron text-white rounded-lg px-4 py-2 text-sm" data-id="${art.id}">Preview</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Logic
+        function filterAndRender() {
+            const searchTerm = searchBar.value.toLowerCase();
+            const category = categoryFilter.value;
+
+            const filteredArt = artData.filter(art => {
+                const matchesCategory = category === 'all' || art.category === category;
+                const matchesSearch = art.title.toLowerCase().includes(searchTerm) || art.artist.toLowerCase().includes(searchTerm) || art.tags.join(' ').toLowerCase().includes(searchTerm);
+                return matchesCategory && matchesSearch;
+            });
+            renderGallery(filteredArt);
+        }
+
+        // Modal Logic
+        function openModal(id) {
+            const art = artData.find(item => item.id == id);
+            if (!art) return;
+
+            modalImg.src = art.full.hd;
+            modalImg.alt = art.title;
+            modalTitle.textContent = art.title;
+            modalArtist.textContent = art.artist;
+            downloadHD.href = art.full.hd;
+            download4K.href = art.full['4k'];
+
+            modal.classList.remove('hidden', 'opacity-0', 'visibility-hidden');
+            setTimeout(() => modalContent.classList.remove('scale-95'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalContent.classList.add('scale-95');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden', 'visibility-hidden');
+                document.body.style.overflow = 'auto';
+            }, 300);
+        }
+
+        // Audio Player Logic
+        function toggleChalisa() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+                playText.textContent = 'Pause Hanuman Chalisa';
+            } else {
+                audio.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+                playText.textContent = 'Play Hanuman Chalisa';
+            }
+        }
+        
+        // --- EVENT LISTENERS ---
+        searchBar.addEventListener('input', filterAndRender);
+        categoryFilter.addEventListener('change', filterAndRender);
+
+        grid.addEventListener('click', (e) => {
+            if (e.target.classList.contains('preview-btn')) {
+                openModal(e.target.dataset.id);
+            }
+        });
+
+        modalCloseBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        playBtn.addEventListener('click', toggleChalisa);
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- INITIALIZATION ---
+        lucide.createIcons();
+        filterAndRender(); // Initial render
+    });
+    </script>
+</body>
+</html>
